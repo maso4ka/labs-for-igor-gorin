@@ -1,7 +1,7 @@
 package ru.nsu.ineverovich.Task_1_1_1;
 
 public class HeapSort {
-    public static int [] sort(int[] array) {
+    public static int[] sort(int[] array) {
         return new int[] {1, 2, 3};
     }
 }
