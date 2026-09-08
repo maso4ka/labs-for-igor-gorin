@@ -7,8 +7,8 @@ group = 'ru.nsu.ineverovich.Task_1_1_1'
 version = '1.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = '21'
-    targetCompatibility = '21'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 repositories {

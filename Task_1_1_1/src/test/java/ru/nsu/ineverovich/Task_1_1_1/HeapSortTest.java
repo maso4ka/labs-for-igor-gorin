@@ -10,6 +10,6 @@ class HeapSortTest {
     void sort() {
         int[] array = new int[]{1, 3, 2};
         var result = HeapSort.sort(array);
-        assertArrayEquals(new int[]{1, 3, 2}, result);
+        assertArrayEquals(new int[]{1, 2, 3}, result);
     }
 }
