@@ -76,6 +76,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">HeapSort</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс реализует алгоритм пирамидальной сортировки (Heap Sort)
+ Сортирует массив целых чисел по возрастанию</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,15 +109,23 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#heapify(int%5B%5D,int,int)" class="member-name-link">heapify</a><wbr>(int[]&nbsp;array,
  int&nbsp;n,
  int&nbsp;i)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Преобразует поддерево с корнем в индексе i в max-кучу</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sort(int%5B%5D)" class="member-name-link">sort</a><wbr>(int[]&nbsp;array)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Сортирует массив целых чисел с помощью пирамидальной сортировки
+ Время: O(n log n)
+ Память: O(1)</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#swap(int%5B%5D,int,int)" class="member-name-link">swap</a><wbr>(int[]&nbsp;array,
  int&nbsp;i,
  int&nbsp;j)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Меняет местами два элемента в массиве</div>
+</div>
 </div>
 </div>
 </div>
@@ -151,6 +161,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sort(int[])">
 <h3>sort</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">sort</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
+<div class="block">Сортирует массив целых чисел с помощью пирамидальной сортировки
+ Время: O(n log n)
+ Память: O(1)</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив для сортировки</dd>
+<dt>Returns:</dt>
+<dd>отсортированный массив</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -159,6 +178,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">heapify</span><wbr><span class="parameters">(int[]&nbsp;array,
  int&nbsp;n,
  int&nbsp;i)</span></div>
+<div class="block">Преобразует поддерево с корнем в индексе i в max-кучу</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив для преобразования</dd>
+<dd><code>n</code> - размер кучи (количество элементов)</dd>
+<dd><code>i</code> - корень поддерева</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -167,6 +193,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">swap</span><wbr><span class="parameters">(int[]&nbsp;array,
  int&nbsp;i,
  int&nbsp;j)</span></div>
+<div class="block">Меняет местами два элемента в массиве</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив</dd>
+<dd><code>i</code> - первый элемент</dd>
+<dd><code>j</code> - второй элемент</dd>
+</dl>
 </section>
 </li>
 </ul>
