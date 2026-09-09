@@ -1,11 +1,14 @@
 package ru.nsu.ineverovich.Task_1_1_1;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Тесты для класса HeapSort
+ * Проверяют корректность алгоритма сортировки
+ */
 class HeapSortTest {
 
     @Test
