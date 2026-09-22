@@ -1,8 +1,11 @@
 package ru.nsu.ineverovich.task112.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import ru.nsu.ineverovich.task112.model.Card;
 import ru.nsu.ineverovich.task112.model.Deck;
 import ru.nsu.ineverovich.task112.model.Rank;
