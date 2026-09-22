@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Deck {
+    public static final int STANDARD_DECK_COUNT = 1;
     public static final int CARDS_PER_DECK = 52;
     private static final int MIN_DECK_COUNT = 1;
 

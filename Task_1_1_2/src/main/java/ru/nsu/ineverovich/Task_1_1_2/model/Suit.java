@@ -2,7 +2,7 @@ package ru.nsu.ineverovich.Task_1_1_2.model;
 
 public enum Suit {
     SPADES("Пики"),
-    HEATRS("Черви"),
+    HEARTS("Черви"),
     DIAMONDS("Бубны"),
     CLUBS("Трефы");
 
