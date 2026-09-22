@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ineverovich.Task_1_1_2"},{"l":"ru.nsu.ineverovich.Task_1_1_2.game"},{"l":"ru.nsu.ineverovich.Task_1_1_2.model"},{"l":"ru.nsu.ineverovich.Task_1_1_2.ui"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ineverovich.task112"},{"l":"ru.nsu.ineverovich.task112.game"},{"l":"ru.nsu.ineverovich.task112.model"},{"l":"ru.nsu.ineverovich.task112.ui"}];updateSearchResults();

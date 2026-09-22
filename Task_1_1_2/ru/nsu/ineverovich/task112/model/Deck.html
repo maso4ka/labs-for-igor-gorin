@@ -5,7 +5,7 @@
 <title>Deck (Task_1_1_2 1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: ru.nsu.ineverovich.Task_1_1_2.model, class: Deck">
+<meta name="description" content="declaration: package: ru.nsu.ineverovich.task112.model, class: Deck">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -67,16 +67,17 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.ineverovich.Task_1_1_2.model</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.ineverovich.task112.model</a></div>
 <h1 title="Class Deck" class="title">Class Deck</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">ru.nsu.ineverovich.Task_1_1_2.model.Deck</div>
+<div class="inheritance">ru.nsu.ineverovich.task112.model.Deck</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Deck</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Представляет колоду карт Blackjack.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,10 +92,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
 <div class="col-second even-row-color"><code><a href="#CARDS_PER_DECK" class="member-name-link">CARDS_PER_DECK</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Количество карт в стандартной колоде.</div>
+</div>
 <div class="col-first odd-row-color"><code>static final int</code></div>
 <div class="col-second odd-row-color"><code><a href="#STANDARD_DECK_COUNT" class="member-name-link">STANDARD_DECK_COUNT</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Количество стандартных колод.</div>
+</div>
 </div>
 </section>
 </li>
@@ -107,9 +112,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Deck</a><wbr>(int&nbsp;deckCount)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">Deck</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ineverovich.Task_1_1_2.model">Card</a>&gt;&nbsp;cards)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт и перемешивает указанное количество
+ стандартных колод.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">Deck</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a>&gt;&nbsp;cards)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Создаёт колоду из переданного списка карт.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,18 +134,27 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Card.html" title="class in ru.nsu.ineverovich.Task_1_1_2.model">Card</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#draw()" class="member-name-link">draw</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Извлекает следующую карту из колоды.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, закончились ли карты в колоде.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shuffle()" class="member-name-link">shuffle</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Перемешивает карты и начинает раздачу
+ с первой карты.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#size()" class="member-name-link">size</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает количество оставшихся карт.</div>
+</div>
 </div>
 </div>
 </div>
@@ -157,11 +176,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="STANDARD_DECK_COUNT">
 <h3>STANDARD_DECK_COUNT</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">STANDARD_DECK_COUNT</span></div>
+<div class="block">Количество стандартных колод.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="../../../../../constant-values.html#ru.nsu.ineverovich.Task_1_1_2.model.Deck.STANDARD_DECK_COUNT">Constant Field Values</a></li>
+<li><a href="../../../../../constant-values.html#ru.nsu.ineverovich.task112.model.Deck.STANDARD_DECK_COUNT">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>
@@ -171,11 +191,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="CARDS_PER_DECK">
 <h3>CARDS_PER_DECK</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">CARDS_PER_DECK</span></div>
+<div class="block">Количество карт в стандартной колоде.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="../../../../../constant-values.html#ru.nsu.ineverovich.Task_1_1_2.model.Deck.CARDS_PER_DECK">Constant Field Values</a></li>
+<li><a href="../../../../../constant-values.html#ru.nsu.ineverovich.task112.model.Deck.CARDS_PER_DECK">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>
@@ -193,12 +214,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>Deck</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Deck</span><wbr><span class="parameters">(int&nbsp;deckCount)</span></div>
+<div class="block">Создаёт и перемешивает указанное количество
+ стандартных колод.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>deckCount</code> - количество колод</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>Deck</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Deck</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ineverovich.Task_1_1_2.model">Card</a>&gt;&nbsp;cards)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Deck</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a>&gt;&nbsp;cards)</span></div>
+<div class="block">Создаёт колоду из переданного списка карт.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>cards</code> - карты колоды</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -213,24 +245,43 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="shuffle()">
 <h3>shuffle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">shuffle</span>()</div>
+<div class="block">Перемешивает карты и начинает раздачу
+ с первой карты.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="draw()">
 <h3>draw</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in ru.nsu.ineverovich.Task_1_1_2.model">Card</a></span>&nbsp;<span class="element-name">draw</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a></span>&nbsp;<span class="element-name">draw</span>()</div>
+<div class="block">Извлекает следующую карту из колоды.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>извлечённая карта</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - если в колоде не осталось карт</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Проверяет, закончились ли карты в колоде.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если карт не осталось</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="size()">
 <h3>size</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">size</span>()</div>
+<div class="block">Возвращает количество оставшихся карт.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>количество оставшихся карт</dd>
+</dl>
 </section>
 </li>
 </ul>
