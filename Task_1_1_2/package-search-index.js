@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ineverovich.Task_1_1_2"},{"l":"ru.nsu.ineverovich.Task_1_1_2.game"},{"l":"ru.nsu.ineverovich.Task_1_1_2.model"},{"l":"ru.nsu.ineverovich.Task_1_1_2.ui"}];updateSearchResults();
