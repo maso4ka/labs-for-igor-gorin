@@ -1,9 +1,8 @@
-package ru.nsu.ineverovich.Task_1_1_2.model;
+package ru.nsu.ineverovich.task112.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 class PlayerTest {

@@ -1,5 +1,8 @@
-package ru.nsu.ineverovich.Task_1_1_2.model;
+package ru.nsu.ineverovich.task112.model;
 
+/**
+ * Определяет достоинства карт и их базовые значения.
+ */
 public enum Rank {
     TWO(2, "Двойка"),
     THREE(3, "Тройка"),
@@ -18,17 +21,32 @@ public enum Rank {
     private final String cardName;
     private final int baseValue;
 
+    /**
+     * Создаёт достоинство карты.
+     *
+     * @param baseValue базовое значение карты
+     * @param cardName название карты
+     */
     Rank(int baseValue, String cardName) {
         this.baseValue = baseValue;
         this.cardName = cardName;
     }
 
+    /**
+     * Возвращает название достоинства карты.
+     *
+     * @return название карты
+     */
     public String getCardName() {
         return cardName;
     }
 
+    /**
+     * Возвращает базовое числовое значение карты.
+     *
+     * @return базовое значение карты
+     */
     public int getBaseValue() {
         return baseValue;
     }
 }
-

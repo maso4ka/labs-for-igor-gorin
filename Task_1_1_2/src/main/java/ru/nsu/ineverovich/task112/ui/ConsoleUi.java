@@ -1,16 +1,20 @@
-package ru.nsu.ineverovich.Task_1_1_2.ui;
-
-import ru.nsu.ineverovich.Task_1_1_2.game.Game;
-import ru.nsu.ineverovich.Task_1_1_2.game.Round;
-import ru.nsu.ineverovich.Task_1_1_2.model.Card;
-import ru.nsu.ineverovich.Task_1_1_2.model.Dealer;
-import ru.nsu.ineverovich.Task_1_1_2.model.User;
+package ru.nsu.ineverovich.task112.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public final class ConsoleUI {
+import ru.nsu.ineverovich.task112.game.Game;
+import ru.nsu.ineverovich.task112.game.Round;
+import ru.nsu.ineverovich.task112.model.Card;
+import ru.nsu.ineverovich.task112.model.Dealer;
+import ru.nsu.ineverovich.task112.model.User;
+
+/**
+ * Управляет взаимодействием игрока с консольной
+ * версией игры Blackjack.
+ */
+public final class ConsoleUi {
     private static final String DEFAULT_PLAYER_NAME = "Игрок";
     private static final int DEFAULT_DECK_COUNT = 1;
     private static final int ACTION_STAND = 0;
@@ -18,15 +22,29 @@ public final class ConsoleUI {
     private final Scanner scanner;
     private final PrintStream output;
 
-    public ConsoleUI() {
+    /**
+     * Создаёт консольный интерфейс со стандартными
+     * потоками ввода и вывода.
+     */
+    public ConsoleUi() {
         this(System.in, System.out);
     }
 
-    public ConsoleUI(InputStream input, PrintStream output) {
+    /**
+     * Создаёт консольный интерфейс с указанными
+ * потоками ввода и вывода.
+     *
+     * @param input поток ввода
+     * @param output поток вывода
+     */
+    public ConsoleUi(InputStream input, PrintStream output) {
         scanner = new Scanner(input);
         this.output = output;
     }
 
+    /**
+     * Запускает игровой цикл.
+     */
     public void run() {
         printWelcome();
         int deckCount = readDeckCount();
@@ -61,7 +79,8 @@ public final class ConsoleUI {
     }
 
     private int readDeckCount() {
-        output.print("Введите количество колод (1 по умолчанию): ");
+        output.print(
+                "Введите количество колод (1 по умолчанию): ");
         String line = scanner.nextLine().trim();
         if (line.isEmpty()) {
             return DEFAULT_DECK_COUNT;
@@ -85,8 +104,8 @@ public final class ConsoleUI {
     }
 
     private boolean handleBlackjacks(Round round, Game game) {
-        User user = round.getUser();
-        Dealer dealer = round.getDealer();
+        final User user = round.getUser();
+        final Dealer dealer = round.getDealer();
         if (!user.hasBlackjack() && !dealer.hasBlackjack()) {
             return false;
         }
@@ -100,7 +119,7 @@ public final class ConsoleUI {
     }
 
     private void playerTurn(Round round) {
-        User user = round.getUser();
+        final User user = round.getUser();
         output.println();
         output.println("Ваш ход");
         output.println("-------");
@@ -114,14 +133,15 @@ public final class ConsoleUI {
             output.println("Вы открыли карту " + card + " (" + card.getValue() + ")");
             printState(round, true);
             if (user.isBust()) {
-                output.println("Вы набрали больше 21. Вы проиграли раунд.");
+                output.println(
+                        "Вы набрали больше 21. Вы проиграли раунд.");
                 return;
             }
         }
     }
 
     private void dealerTurn(Round round) {
-        Dealer dealer = round.getDealer();
+        final Dealer dealer = round.getDealer();
         output.println();
         output.println("Ход дилера");
         output.println("-------");
@@ -131,7 +151,9 @@ public final class ConsoleUI {
         while (dealer.getScore() < Dealer.STAND_SCORE) {
             Card card = round.drawCard();
             dealer.receiveCard(card);
-            output.println("Дилер открывает карту " + card + " (" + card.getValue() + ")");
+            output.println(
+                    "Дилер открывает карту " + card + " ("
+                            + card.getValue() + ")");
             printState(round, false);
             if (dealer.isBust()) {
                 output.println("Дилер набрал больше 21.");
@@ -158,19 +180,25 @@ public final class ConsoleUI {
     }
 
     private void printState(Round round, boolean hideDealerCard) {
-        User user = round.getUser();
-        Dealer dealer = round.getDealer();
+        final User user = round.getUser();
+        final Dealer dealer = round.getDealer();
         output.println("Ваши карты: " + user.getHand() + " > " + user.getScore());
         if (hideDealerCard && round.isDealerCardHidden()) {
-            output.println("Карты дилера: " + dealer.getHand() + ", <закрытая карта>");
+            output.println(
+                    "Карты дилера: " + dealer.getHand()
+                            + ", <закрытая карта>");
         } else {
-            output.println("Карты дилера: " + dealer.getHand() + " > " + dealer.getScore());
+            output.println(
+                    "Карты дилера: " + dealer.getHand() + " > "
+                            + dealer.getScore());
         }
     }
 
     private int readAction() {
         while (true) {
-            output.print("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться: ");
+            output.print(
+                    "Введите \"1\", чтобы взять карту, и \"0\", "
+                            + "чтобы остановиться: ");
             String input = scanner.nextLine().trim();
             if ("0".equals(input) || "1".equals(input)) {
                 return Integer.parseInt(input);
@@ -189,7 +217,7 @@ public final class ConsoleUI {
             if ("0".equals(input)) {
                 return false;
             }
-            output.println("Введите только 1 или 0  .");
+            output.println("Введите только 1 или 0.");
         }
     }
 }

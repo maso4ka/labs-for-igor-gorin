@@ -1,13 +1,12 @@
-package ru.nsu.ineverovich.Task_1_1_2.game;
+package ru.nsu.ineverovich.task112.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import ru.nsu.ineverovich.Task_1_1_2.model.Card;
-import ru.nsu.ineverovich.Task_1_1_2.model.Deck;
-import ru.nsu.ineverovich.Task_1_1_2.model.Rank;
-import ru.nsu.ineverovich.Task_1_1_2.model.Suit;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import ru.nsu.ineverovich.task112.model.Card;
+import ru.nsu.ineverovich.task112.model.Deck;
+import ru.nsu.ineverovich.task112.model.Rank;
+import ru.nsu.ineverovich.task112.model.Suit;
 
 class GameTest {
     private static final String PLAYER_NAME = "Иван";
