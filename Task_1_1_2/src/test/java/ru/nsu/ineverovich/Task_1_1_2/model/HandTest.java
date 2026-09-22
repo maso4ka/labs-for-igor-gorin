@@ -8,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class HandTest {
-    private static final int SCORE_TWENTY_ONE = 21;
+    private static final int SCORE_FOURTEEN = 14;
     private static final int SCORE_TWENTY = 20;
-    private static final int SCORE_TWENTY_TWO = 22;
+    private static final int SCORE_TWENTY_ONE = 21;
+    private static final int SCORE_TWENTY_THREE = 23;
 
     @Test
     void calculatesNumberCards() {
@@ -30,7 +31,7 @@ class HandTest {
         hand.addCard(card(Rank.SIX));
         hand.addCard(card(Rank.SEVEN));
 
-        assertEquals(SCORE_TWENTY_ONE, hand.getTotal());
+        assertEquals(SCORE_FOURTEEN, hand.getTotal());
         assertFalse(hand.isBust());
     }
 
@@ -60,7 +61,7 @@ class HandTest {
         hand.addCard(card(Rank.QUEEN));
         hand.addCard(card(Rank.THREE));
 
-        assertEquals(SCORE_TWENTY_TWO, hand.getTotal());
+        assertEquals(SCORE_TWENTY_THREE, hand.getTotal());
         assertTrue(hand.isBust());
     }
 
@@ -74,6 +75,24 @@ class HandTest {
 
         hand.addCard(card(Rank.TWO));
         assertFalse(hand.isBlackjack());
+    }
+
+    @Test
+    void rejectsNullCard() {
+        Hand hand = new Hand();
+
+        assertThrows(IllegalArgumentException.class, () -> hand.addCard(null));
+    }
+
+    @Test
+    void returnsUnmodifiableCards() {
+        Hand hand = new Hand();
+        hand.addCard(card(Rank.TEN));
+
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> hand.getCards().add(card(Rank.TWO))
+        );
     }
 
     private static Card card(Rank rank) {
