@@ -1,6 +1,5 @@
 package ru.nsu.ineverovich.task112.model;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,9 +23,30 @@ class PlayerTest {
     }
 
     @Test
+    void detectsBustByHandState() {
+        User user = new User(PLAYER_NAME);
+        user.receiveCard(new Card(Suit.SPADES, Rank.KING));
+        user.receiveCard(new Card(Suit.HEARTS, Rank.QUEEN));
+        user.receiveCard(new Card(Suit.DIAMONDS, Rank.THREE));
+
+        assertTrue(user.isBust());
+        assertFalse(user.hasBlackjack());
+    }
+
+    @Test
     void dealerName() {
         Dealer dealer = new Dealer();
 
         assertEquals("Дилер", dealer.getName());
+    }
+
+    @Test
+    void resetsHand() {
+        User user = new User(PLAYER_NAME);
+        user.receiveCard(new Card(Suit.SPADES, Rank.TEN));
+
+        user.resetHand();
+
+        assertEquals(0, user.getHand().getCards().size());
     }
 }

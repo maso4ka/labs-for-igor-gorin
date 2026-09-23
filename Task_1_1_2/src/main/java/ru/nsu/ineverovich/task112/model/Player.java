@@ -44,6 +44,13 @@ public abstract class Player {
     }
 
     /**
+     * Очищает руку участника перед новым раундом.
+     */
+    public void resetHand() {
+        hand.clear();
+    }
+
+    /**
      * Возвращает текущее значение руки участника.
      *
      * @return значение руки
@@ -53,20 +60,21 @@ public abstract class Player {
     }
 
     /**
-     * Проверяет, перебрал ли участник 21.
+     * Проверяет состояние руки и определяет перебор.
      *
      * @return {@code true}, если участник перебрал 21
      */
     public boolean isBust() {
-        return hand.isBust();
+        return getScore() > Hand.SCORE;
     }
 
     /**
-     * Проверяет, есть ли у участника Blackjack.
+     * Проверяет состояние руки и определяет Blackjack.
      *
      * @return {@code true}, если у участника Blackjack
      */
     public boolean hasBlackjack() {
-        return hand.isBlackjack();
+        return hand.getCards().size() == Hand.CARD_COUNT
+                && getScore() == Hand.SCORE;
     }
 }

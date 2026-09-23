@@ -2,20 +2,24 @@ package ru.nsu.ineverovich.task112.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 import ru.nsu.ineverovich.task112.game.Game;
+import ru.nsu.ineverovich.task112.game.Result;
 import ru.nsu.ineverovich.task112.game.Round;
 import ru.nsu.ineverovich.task112.model.Card;
+import ru.nsu.ineverovich.task112.model.Deck;
 import ru.nsu.ineverovich.task112.model.Dealer;
 import ru.nsu.ineverovich.task112.model.User;
 
 /**
- * Управляет взаимодействием игрока с консольной
- * версией игры Blackjack.
+ * Управляет вводом и выводом консольной версии игры
+ * Blackjack.
  */
 public final class ConsoleUi {
     private static final String DEFAULT_PLAYER_NAME = "Игрок";
     private static final int DEFAULT_DECK_COUNT = 1;
+    private static final int FIRST_ROUND_NUMBER = 1;
     private static final int ACTION_STAND = 0;
 
     private final Scanner scanner;
@@ -23,7 +27,7 @@ public final class ConsoleUi {
 
     /**
      * Создаёт консольный интерфейс со стандартными
-     * потоками ввода и вывода.
+     * потоками.
      */
     public ConsoleUi() {
         this(System.in, System.out);
@@ -31,7 +35,7 @@ public final class ConsoleUi {
 
     /**
      * Создаёт консольный интерфейс с указанными
- * потоками ввода и вывода.
+     * потоками.
      *
      * @param input поток ввода
      * @param output поток вывода
@@ -47,11 +51,17 @@ public final class ConsoleUi {
     public void run() {
         printWelcome();
         int deckCount = readDeckCount();
-        Game game = new Game(deckCount, DEFAULT_PLAYER_NAME);
+        Game game = new Game(DEFAULT_PLAYER_NAME);
+        int roundNumber = FIRST_ROUND_NUMBER;
         boolean continueGame = true;
         while (continueGame) {
-            Round round = game.createRound();
-            printRoundHeader(game.getRoundNumber());
+            Round round = new Round(
+                    new Deck(deckCount),
+                    game.getUser(),
+                    game.getDealer(),
+                    roundNumber++);
+            round.dealInitialCards();
+            printRoundHeader(round.getRoundNumber());
             printInitialHands(round);
             playRound(round, game);
             continueGame = askContinue();
@@ -61,15 +71,21 @@ public final class ConsoleUi {
     }
 
     private void playRound(Round round, Game game) {
-        if (!handleBlackjacks(round, game)) {
-            playerTurn(round);
-            if (!round.getUser().isBust()) {
-                dealerTurn(round);
-            }
-            if (!round.isFinished()) {
-                finishRound(round, game);
-            }
+        Result result = game.checkBlackjack(round);
+        if (result != null) {
+            printState(round, false);
+            printResult(result, game);
+            return;
         }
+        playerTurn(round, game);
+        if (game.isPlayerBust()) {
+            Result bustResult = game.finishRound(round);
+            printResult(bustResult, game);
+            return;
+        }
+        dealerTurn(round, game);
+        Result finalResult = game.finishRound(round);
+        printResult(finalResult, game);
     }
 
     private void printWelcome() {
@@ -102,23 +118,7 @@ public final class ConsoleUi {
         printState(round, true);
     }
 
-    private boolean handleBlackjacks(Round round, Game game) {
-        final User user = round.getUser();
-        final Dealer dealer = round.getDealer();
-        if (!user.hasBlackjack() && !dealer.hasBlackjack()) {
-            return false;
-        }
-        round.revealDealerCard();
-        printState(round, false);
-        Round.Result result = round.determineResult();
-        game.registerResult(result);
-        printResult(result, game);
-        round.finish();
-        return true;
-    }
-
-    private void playerTurn(Round round) {
-        final User user = round.getUser();
+    private void playerTurn(Round round, Game game) {
         output.println();
         output.println("Ваш ход");
         output.println("-------");
@@ -127,11 +127,11 @@ public final class ConsoleUi {
             if (action == ACTION_STAND) {
                 return;
             }
-            Card card = round.drawCard();
-            user.receiveCard(card);
-            output.println("Вы открыли карту " + card + " (" + card.getValue() + ")");
+            Card card = game.takeCard(round);
+            output.println(
+                    "Вы открыли карту " + card + " (" + card.getValue() + ")");
             printState(round, true);
-            if (user.isBust()) {
+            if (game.isPlayerBust()) {
                 output.println(
                         "Вы набрали больше 21. Вы проиграли раунд.");
                 return;
@@ -139,39 +139,29 @@ public final class ConsoleUi {
         }
     }
 
-    private void dealerTurn(Round round) {
-        final Dealer dealer = round.getDealer();
+    private void dealerTurn(Round round, Game game) {
         output.println();
         output.println("Ход дилера");
         output.println("-------");
-        round.revealDealerCard();
+        Dealer dealer = game.getDealer();
+        List<Card> cards = game.playDealerTurn(round);
         output.println("Дилер открывает закрытую карту.");
         printState(round, false);
-        while (dealer.getScore() < Dealer.STAND_SCORE) {
-            Card card = round.drawCard();
-            dealer.receiveCard(card);
+        for (Card card : cards) {
             output.println(
                     "Дилер открывает карту " + card + " ("
                             + card.getValue() + ")");
             printState(round, false);
-            if (dealer.isBust()) {
-                output.println("Дилер набрал больше 21.");
-                return;
-            }
+        }
+        if (dealer.isBust()) {
+            output.println("Дилер набрал больше 21.");
         }
     }
 
-    private void finishRound(Round round, Game game) {
-        Round.Result result = round.determineResult();
-        game.registerResult(result);
-        printResult(result, game);
-        round.finish();
-    }
-
-    private void printResult(Round.Result result, Game game) {
-        if (result == Round.Result.PLAYER_WIN) {
+    private void printResult(Result result, Game game) {
+        if (result == Result.PLAYER_WIN) {
             output.println("Вы выиграли раунд! " + game.getScoreText());
-        } else if (result == Round.Result.DEALER_WIN) {
+        } else if (result == Result.DEALER_WIN) {
             output.println("Дилер выиграл раунд.");
         } else {
             output.println("Ничья.");
@@ -179,8 +169,8 @@ public final class ConsoleUi {
     }
 
     private void printState(Round round, boolean hideDealerCard) {
-        final User user = round.getUser();
-        final Dealer dealer = round.getDealer();
+        User user = round.getUser();
+        Dealer dealer = round.getDealer();
         output.println("Ваши карты: " + user.getHand() + " > " + user.getScore());
         if (hideDealerCard && round.isDealerCardHidden()) {
             output.println(

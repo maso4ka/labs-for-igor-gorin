@@ -9,36 +9,35 @@ import ru.nsu.ineverovich.task112.model.User;
  * Управляет состоянием одного раунда Blackjack.
  */
 public final class Round {
-    /**
-     * Определяет возможный результат раунда.
-     */
-    public enum Result {
-        PLAYER_WIN,
-        DEALER_WIN,
-        DRAW
-    }
-
     private static final int INITIAL_CARD_COUNT = 2;
 
+    private final int roundNumber;
     private final Deck deck;
     private final User user;
     private final Dealer dealer;
-    private Card hiddenDealerCard;
     private boolean finished;
 
     /**
      * Создаёт новый раунд.
      *
      * @param deck колода для раунда
-     * @param playerName имя игрока
+     * @param user игрок игры
+     * @param dealer дилер игры
+     * @param roundNumber номер раунда
      */
-    public Round(Deck deck, String playerName) {
+    public Round(Deck deck, User user, Dealer dealer, int roundNumber) {
         if (deck == null) {
             throw new IllegalArgumentException("Колода не может быть null");
         }
+        if (user == null || dealer == null) {
+            throw new IllegalArgumentException("Участники не могут быть null");
+        }
         this.deck = deck;
-        user = new User(playerName);
-        dealer = new Dealer();
+        this.user = user;
+        this.dealer = dealer;
+        this.roundNumber = roundNumber;
+        user.resetHand();
+        dealer.resetHand();
     }
 
     /**
@@ -48,11 +47,20 @@ public final class Round {
         for (int cardIndex = 0; cardIndex < INITIAL_CARD_COUNT; cardIndex++) {
             user.receiveCard(deck.draw());
             if (cardIndex == INITIAL_CARD_COUNT - 1) {
-                hiddenDealerCard = deck.draw();
+                dealer.receiveHiddenCard(deck.draw());
             } else {
                 dealer.receiveCard(deck.draw());
             }
         }
+    }
+
+    /**
+     * Возвращает номер раунда.
+     *
+     * @return номер раунда
+     */
+    public int getRoundNumber() {
+        return roundNumber;
     }
 
     /**
@@ -83,31 +91,12 @@ public final class Round {
     }
 
     /**
-     * Возвращает закрытую карту дилера.
-     *
-     * @return закрытая карта или {@code null}, если карта открыта
-     */
-    public Card getHiddenDealerCard() {
-        return hiddenDealerCard;
-    }
-
-    /**
-     * Открывает закрытую карту дилера.
-     */
-    public void revealDealerCard() {
-        if (hiddenDealerCard != null) {
-            dealer.receiveCard(hiddenDealerCard);
-            hiddenDealerCard = null;
-        }
-    }
-
-    /**
      * Проверяет, остаётся ли карта дилера закрытой.
      *
      * @return {@code true}, если карта закрыта
      */
     public boolean isDealerCardHidden() {
-        return hiddenDealerCard != null;
+        return dealer.isHiddenCardPresent();
     }
 
     /**
@@ -128,7 +117,7 @@ public final class Round {
 
     /**
      * Определяет результат раунда по картам игрока
- * и дилера.
+     * и дилера.
      *
      * @return результат раунда
      */

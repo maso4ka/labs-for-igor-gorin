@@ -1,59 +1,128 @@
 package ru.nsu.ineverovich.task112.game;
 
-import ru.nsu.ineverovich.task112.model.Deck;
+import java.util.ArrayList;
+import java.util.List;
+import ru.nsu.ineverovich.task112.model.Card;
+import ru.nsu.ineverovich.task112.model.Dealer;
+import ru.nsu.ineverovich.task112.model.User;
 
 /**
- * Управляет игровыми раундами Blackjack и хранит счёт игры.
+ * Управляет состоянием игры и её участниками.
  */
 public final class Game {
-    private static final int INITIAL_ROUND_NUMBER = 0;
-
-    private final int deckCount;
-    private final String playerName;
-    private int roundNumber = INITIAL_ROUND_NUMBER;
+    private final User user;
+    private final Dealer dealer;
     private int playerWins;
     private int dealerWins;
 
     /**
      * Создаёт новую игру.
      *
-     * @param deckCount количество колод
      * @param playerName имя игрока
      */
-    public Game(int deckCount, String playerName) {
-        this.deckCount = deckCount;
-        this.playerName = playerName;
+    public Game(String playerName) {
+        user = new User(playerName);
+        dealer = new Dealer();
     }
 
     /**
-     * Создаёт новый раунд игры.
+     * Возвращает игрока игры.
      *
-     * @return новый раунд
+     * @return игрок
      */
-    public Round createRound() {
-        return createRound(new Deck(deckCount));
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Создаёт новый раунд с указанной колодой.
+     * Возвращает дилера игры.
      *
-     * @param deck колода для раунда
-     * @return созданный раунд
+     * @return дилер
      */
-    Round createRound(Deck deck) {
-        roundNumber++;
-        Round round = new Round(deck, playerName);
-        round.dealInitialCards();
-        return round;
+    public Dealer getDealer() {
+        return dealer;
     }
 
     /**
-     * Возвращает номер текущего раунда.
+     * Проверяет наличие Blackjack у участников.
      *
-     * @return номер раунда
+     * @param round текущий раунд
+     * @return результат, если Blackjack уже определяет исход,
+     *         иначе {@code null}
      */
-    public int getRoundNumber() {
-        return roundNumber;
+    public Result checkBlackjack(Round round) {
+        if (!user.hasBlackjack() && !dealer.hasHiddenBlackjack()) {
+            return null;
+        }
+        dealer.revealHiddenCard();
+        return finishRound(round);
+    }
+
+    /**
+     * Даёт игроку следующую карту.
+     *
+     * @param round текущий раунд
+     * @return полученная карта
+     */
+    public Card takeCard(Round round) {
+        Card card = round.drawCard();
+        user.receiveCard(card);
+        return card;
+    }
+
+    /**
+     * Проверяет, закончен ли ход игрока из-за перебора.
+     *
+     * @return {@code true}, если игрок перебрал
+     */
+    public boolean isPlayerBust() {
+        return user.isBust();
+    }
+
+    /**
+     * Выполняет ход дилера.
+     *
+     * @param round текущий раунд
+     * @return карты, которые дилер открыл в этом ходе
+     */
+    public List<Card> playDealerTurn(Round round) {
+        List<Card> drawnCards = new ArrayList<>();
+        dealer.revealHiddenCard();
+        while (dealer.getScore() < Dealer.STAND_SCORE) {
+            Card card = round.drawCard();
+            dealer.receiveCard(card);
+            drawnCards.add(card);
+            if (dealer.isBust()) {
+                break;
+            }
+        }
+        return drawnCards;
+    }
+
+    /**
+     * Определяет и регистрирует результат раунда.
+     *
+     * @param round завершённый раунд
+     * @return результат раунда
+     */
+    public Result finishRound(Round round) {
+        Result result = round.determineResult();
+        registerResult(result);
+        round.finish();
+        return result;
+    }
+
+    /**
+     * Регистрирует результат завершённого раунда.
+     *
+     * @param result результат раунда
+     */
+    public void registerResult(Result result) {
+        if (result == Result.PLAYER_WIN) {
+            playerWins++;
+        } else if (result == Result.DEALER_WIN) {
+            dealerWins++;
+        }
     }
 
     /**
@@ -72,19 +141,6 @@ public final class Game {
      */
     public int getDealerWins() {
         return dealerWins;
-    }
-
-    /**
-     * Регистрирует результат завершённого раунда.
-     *
-     * @param result результат раунда
-     */
-    public void registerResult(Round.Result result) {
-        if (result == Round.Result.PLAYER_WIN) {
-            playerWins++;
-        } else if (result == Round.Result.DEALER_WIN) {
-            dealerWins++;
-        }
     }
 
     /**

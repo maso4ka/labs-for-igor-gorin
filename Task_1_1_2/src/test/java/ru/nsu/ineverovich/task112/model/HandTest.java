@@ -1,10 +1,7 @@
 package ru.nsu.ineverovich.task112.model;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +19,6 @@ class HandTest {
         hand.addCard(card(Rank.THREE));
 
         assertEquals(SCORE_TWENTY, hand.getTotal());
-        assertFalse(hand.isBust());
     }
 
     @Test
@@ -33,7 +29,6 @@ class HandTest {
         hand.addCard(card(Rank.SEVEN));
 
         assertEquals(SCORE_FOURTEEN, hand.getTotal());
-        assertFalse(hand.isBust());
     }
 
     @Test
@@ -56,26 +51,13 @@ class HandTest {
     }
 
     @Test
-    void detectsBust() {
+    void calculatesBustScore() {
         Hand hand = new Hand();
         hand.addCard(card(Rank.KING));
         hand.addCard(card(Rank.QUEEN));
         hand.addCard(card(Rank.THREE));
 
         assertEquals(SCORE_TWENTY_THREE, hand.getTotal());
-        assertTrue(hand.isBust());
-    }
-
-    @Test
-    void detectsBlackjack() {
-        Hand hand = new Hand();
-        hand.addCard(card(Rank.ACE));
-        hand.addCard(card(Rank.KING));
-
-        assertTrue(hand.isBlackjack());
-
-        hand.addCard(card(Rank.TWO));
-        assertFalse(hand.isBlackjack());
     }
 
     @Test
@@ -92,8 +74,17 @@ class HandTest {
 
         assertThrows(
                 UnsupportedOperationException.class,
-                () -> hand.getCards().add(card(Rank.TWO))
-        );
+                () -> hand.getCards().add(card(Rank.TWO)));
+    }
+
+    @Test
+    void clearsCards() {
+        Hand hand = new Hand();
+        hand.addCard(card(Rank.TEN));
+
+        hand.clear();
+
+        assertEquals(0, hand.getCards().size());
     }
 
     private static Card card(Rank rank) {

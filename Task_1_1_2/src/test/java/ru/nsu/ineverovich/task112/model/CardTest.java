@@ -1,6 +1,5 @@
 package ru.nsu.ineverovich.task112.model;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;

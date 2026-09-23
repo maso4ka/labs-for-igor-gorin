@@ -62,22 +62,13 @@ public final class Hand {
         return total;
     }
 
-    /**
-     * Проверяет, превышает ли значение руки 21.
-     *
-     * @return {@code true}, если рука перебрала 21
-     */
-    public boolean isBust() {
-        return getTotal() > SCORE;
-    }
+
 
     /**
-     * Проверяет, является ли рука комбинацией Blackjack.
-     *
-     * @return {@code true}, если рука содержит две карты с суммой 21
+     * Очищает руку перед новым раундом.
      */
-    public boolean isBlackjack() {
-        return cards.size() == CARD_COUNT && getTotal() == SCORE;
+    public void clear() {
+        cards.clear();
     }
 
     /**
