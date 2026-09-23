@@ -8,8 +8,8 @@ import ru.nsu.ineverovich.task112.game.Game;
 import ru.nsu.ineverovich.task112.game.Result;
 import ru.nsu.ineverovich.task112.game.Round;
 import ru.nsu.ineverovich.task112.model.Card;
-import ru.nsu.ineverovich.task112.model.Deck;
 import ru.nsu.ineverovich.task112.model.Dealer;
+import ru.nsu.ineverovich.task112.model.Deck;
 import ru.nsu.ineverovich.task112.model.User;
 
 /**
@@ -143,7 +143,7 @@ public final class ConsoleUi {
         output.println();
         output.println("Ход дилера");
         output.println("-------");
-        Dealer dealer = game.getDealer();
+        final Dealer dealer = game.getDealer();
         List<Card> cards = game.playDealerTurn(round);
         output.println("Дилер открывает закрытую карту.");
         printState(round, false);

@@ -41,7 +41,7 @@ class RoundTest {
     @Test
     void dealsInitialCardsAndHidesDealerCard() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE), card(Rank.TEN), card(Rank.KING), card(Rank.SIX)),
                 game.getUser(),
                 game.getDealer(),
@@ -59,7 +59,7 @@ class RoundTest {
     void drawsCardFromDeck() {
         Game game = new Game(PLAYER_NAME);
         Card expected = card(Rank.ACE);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(expected), game.getUser(), game.getDealer(), 1);
 
         assertEquals(expected, round.drawCard());
@@ -68,7 +68,7 @@ class RoundTest {
     @Test
     void finishesRound() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
 
         assertFalse(round.isFinished());
@@ -79,7 +79,7 @@ class RoundTest {
     @Test
     void playerAndDealerBlackjackResultIsDraw() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.ACE));
         game.getUser().receiveCard(card(Rank.KING));
@@ -92,7 +92,7 @@ class RoundTest {
     @Test
     void playerBlackjackWins() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.ACE));
         game.getUser().receiveCard(card(Rank.KING));
@@ -105,7 +105,7 @@ class RoundTest {
     @Test
     void dealerBustGivesPlayerWin() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.TEN));
         game.getUser().receiveCard(card(Rank.SIX));
@@ -119,7 +119,7 @@ class RoundTest {
     @Test
     void dealerBlackjackWins() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.TEN));
         game.getUser().receiveCard(card(Rank.NINE));
@@ -132,7 +132,7 @@ class RoundTest {
     @Test
     void playerBustGivesDealerWin() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.KING));
         game.getUser().receiveCard(card(Rank.QUEEN));
@@ -146,7 +146,7 @@ class RoundTest {
     @Test
     void higherPlayerScoreWins() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.TEN));
         game.getUser().receiveCard(card(Rank.EIGHT));
@@ -159,7 +159,7 @@ class RoundTest {
     @Test
     void higherDealerScoreWins() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.TEN));
         game.getUser().receiveCard(card(Rank.TWO));
@@ -172,7 +172,7 @@ class RoundTest {
     @Test
     void equalScoresAreDraw() {
         Game game = new Game(PLAYER_NAME);
-        Round round = new Round(
+        final Round round = new Round(
                 deck(card(Rank.ACE)), game.getUser(), game.getDealer(), 1);
         game.getUser().receiveCard(card(Rank.TEN));
         game.getUser().receiveCard(card(Rank.EIGHT));
