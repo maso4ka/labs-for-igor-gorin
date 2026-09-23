@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'ru.nsu.ineverovich.task112'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true;
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs(
+            '-Dfile.encoding=UTF-8',
+            '-Dstdout.encoding=UTF-8',
+            '-Dstderr.encoding=UTF-8'
+    )
+}
