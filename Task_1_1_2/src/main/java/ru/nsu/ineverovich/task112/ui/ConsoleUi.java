@@ -9,7 +9,6 @@ import ru.nsu.ineverovich.task112.game.Result;
 import ru.nsu.ineverovich.task112.game.Round;
 import ru.nsu.ineverovich.task112.model.Card;
 import ru.nsu.ineverovich.task112.model.Dealer;
-import ru.nsu.ineverovich.task112.model.Deck;
 import ru.nsu.ineverovich.task112.model.User;
 
 /**
@@ -19,23 +18,20 @@ import ru.nsu.ineverovich.task112.model.User;
 public final class ConsoleUi {
     private static final String DEFAULT_PLAYER_NAME = "Игрок";
     private static final int DEFAULT_DECK_COUNT = 1;
-    private static final int FIRST_ROUND_NUMBER = 1;
     private static final int ACTION_STAND = 0;
 
     private final Scanner scanner;
     private final PrintStream output;
 
     /**
-     * Создаёт консольный интерфейс со стандартными
-     * потоками.
+     * Создаёт консольный интерфейс со стандартными потоками.
      */
     public ConsoleUi() {
         this(System.in, System.out);
     }
 
     /**
-     * Создаёт консольный интерфейс с указанными
-     * потоками.
+     * Создаёт консольный интерфейс с указанными потоками.
      *
      * @param input поток ввода
      * @param output поток вывода
@@ -50,41 +46,47 @@ public final class ConsoleUi {
      */
     public void run() {
         printWelcome();
+
         int deckCount = readDeckCount();
-        Game game = new Game(DEFAULT_PLAYER_NAME);
-        int roundNumber = FIRST_ROUND_NUMBER;
+        Game game = new Game(DEFAULT_PLAYER_NAME, deckCount);
+
         boolean continueGame = true;
+
         while (continueGame) {
-            Round round = new Round(
-                    new Deck(deckCount),
-                    game.getUser(),
-                    game.getDealer(),
-                    roundNumber++);
-            round.dealInitialCards();
+            Round round = game.startRound();
+
             printRoundHeader(round.getRoundNumber());
-            printInitialHands(round);
-            playRound(round, game);
+            printInitialHands(game);
+
+            playRound(game);
+
             continueGame = askContinue();
         }
+
         output.println("Игра окончена.");
         output.println(game.getScoreText());
     }
 
-    private void playRound(Round round, Game game) {
-        Result result = game.checkBlackjack(round);
+    private void playRound(Game game) {
+        Result result = game.checkBlackjack();
+
         if (result != null) {
-            printState(round, false);
+            printState(game, false);
             printResult(result, game);
             return;
         }
-        playerTurn(round, game);
+
+        playerTurn(game);
+
         if (game.isPlayerBust()) {
-            Result bustResult = game.finishRound(round);
+            Result bustResult = game.finishRound();
             printResult(bustResult, game);
             return;
         }
-        dealerTurn(round, game);
-        Result finalResult = game.finishRound(round);
+
+        dealerTurn(game);
+
+        Result finalResult = game.finishRound();
         printResult(finalResult, game);
     }
 
@@ -96,10 +98,13 @@ public final class ConsoleUi {
     private int readDeckCount() {
         output.print(
                 "Введите количество колод (1 по умолчанию): ");
+
         String line = scanner.nextLine().trim();
+
         if (line.isEmpty()) {
             return DEFAULT_DECK_COUNT;
         }
+
         try {
             int value = Integer.parseInt(line);
             return value > 0 ? value : DEFAULT_DECK_COUNT;
@@ -113,24 +118,31 @@ public final class ConsoleUi {
         output.println("Раунд " + roundNumber);
     }
 
-    private void printInitialHands(Round round) {
+    private void printInitialHands(Game game) {
         output.println("Дилер раздал карты.");
-        printState(round, true);
+        printState(game, true);
     }
 
-    private void playerTurn(Round round, Game game) {
+    private void playerTurn(Game game) {
         output.println();
         output.println("Ваш ход");
         output.println("-------");
+
         while (true) {
             int action = readAction();
+
             if (action == ACTION_STAND) {
                 return;
             }
-            Card card = game.takeCard(round);
+
+            Card card = game.takeCard();
+
             output.println(
-                    "Вы открыли карту " + card + " (" + card.getValue() + ")");
-            printState(round, true);
+                    "Вы открыли карту " + card
+                            + " (" + card.getValue() + ")");
+
+            printState(game, true);
+
             if (game.isPlayerBust()) {
                 output.println(
                         "Вы набрали больше 21. Вы проиграли раунд.");
@@ -139,20 +151,24 @@ public final class ConsoleUi {
         }
     }
 
-    private void dealerTurn(Round round, Game game) {
+    private void dealerTurn(Game game) {
         output.println();
         output.println("Ход дилера");
         output.println("-------");
+
         final Dealer dealer = game.getDealer();
-        List<Card> cards = game.playDealerTurn(round);
+        List<Card> cards = game.playDealerTurn();
+
         output.println("Дилер открывает закрытую карту.");
-        printState(round, false);
+        printState(game, false);
+
         for (Card card : cards) {
             output.println(
-                    "Дилер открывает карту " + card + " ("
-                            + card.getValue() + ")");
-            printState(round, false);
+                    "Дилер берет карту " + card
+                            + " (" + card.getValue() + ")");
+            printState(game, false);
         }
+
         if (dealer.isBust()) {
             output.println("Дилер набрал больше 21.");
         }
@@ -160,7 +176,8 @@ public final class ConsoleUi {
 
     private void printResult(Result result, Game game) {
         if (result == Result.PLAYER_WIN) {
-            output.println("Вы выиграли раунд! " + game.getScoreText());
+            output.println(
+                    "Вы выиграли раунд! " + game.getScoreText());
         } else if (result == Result.DEALER_WIN) {
             output.println("Дилер выиграл раунд.");
         } else {
@@ -168,18 +185,22 @@ public final class ConsoleUi {
         }
     }
 
-    private void printState(Round round, boolean hideDealerCard) {
-        User user = round.getUser();
-        Dealer dealer = round.getDealer();
-        output.println("Ваши карты: " + user.getHand() + " > " + user.getScore());
-        if (hideDealerCard && round.isDealerCardHidden()) {
+    private void printState(Game game, boolean hideDealerCard) {
+        User user = game.getUser();
+        Dealer dealer = game.getDealer();
+
+        output.println(
+                "Ваши карты: " + user.getHand()
+                        + " > " + user.getScore());
+
+        if (hideDealerCard && dealer.isHiddenCardPresent()) {
             output.println(
                     "Карты дилера: " + dealer.getHand()
                             + ", <закрытая карта>");
         } else {
             output.println(
-                    "Карты дилера: " + dealer.getHand() + " > "
-                            + dealer.getScore());
+                    "Карты дилера: " + dealer.getHand()
+                            + " > " + dealer.getScore());
         }
     }
 
@@ -188,24 +209,32 @@ public final class ConsoleUi {
             output.print(
                     "Введите \"1\", чтобы взять карту, и \"0\", "
                             + "чтобы остановиться: ");
+
             String input = scanner.nextLine().trim();
+
             if ("0".equals(input) || "1".equals(input)) {
                 return Integer.parseInt(input);
             }
+
             output.println("Введите только 1 или 0.");
         }
     }
 
     private boolean askContinue() {
         while (true) {
-            output.print("Сыграть следующий раунд? (1 - да, 0 - нет): ");
+            output.print(
+                    "Сыграть следующий раунд? (1 - да, 0 - нет): ");
+
             String input = scanner.nextLine().trim();
+
             if ("1".equals(input)) {
                 return true;
             }
+
             if ("0".equals(input)) {
                 return false;
             }
+
             output.println("Введите только 1 или 0.");
         }
     }

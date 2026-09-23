@@ -4,6 +4,9 @@ package ru.nsu.ineverovich.task112.model;
  * Представляет участника игры Blackjack и его руку.
  */
 public abstract class Player {
+    private static final int BLACKJACK_SCORE = 21;
+    private static final int BLACKJACK_CARD_COUNT = 2;
+
     private final String name;
     private final Hand hand = new Hand();
 
@@ -62,10 +65,10 @@ public abstract class Player {
     /**
      * Проверяет состояние руки и определяет перебор.
      *
-     * @return {@code true}, если участник перебрал 21
+     * @return {@code true}, если участник набрал больше 21
      */
     public boolean isBust() {
-        return getScore() > Hand.SCORE;
+        return getScore() > BLACKJACK_SCORE;
     }
 
     /**
@@ -74,7 +77,7 @@ public abstract class Player {
      * @return {@code true}, если у участника Blackjack
      */
     public boolean hasBlackjack() {
-        return hand.getCards().size() == Hand.CARD_COUNT
-                && getScore() == Hand.SCORE;
+        return hand.getCards().size() == BLACKJACK_CARD_COUNT
+                && getScore() == BLACKJACK_SCORE;
     }
 }

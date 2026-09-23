@@ -14,7 +14,7 @@ class DeckTest {
 
     @Test
     void createsStandardDeck() {
-        Deck deck = new Deck(Deck.STANDARD_DECK_COUNT);
+        Deck deck = new Deck(DeckConstants.STANDARD_DECK_COUNT);
 
         assertEquals(ONE_DECK_SIZE, deck.size());
         assertTrue(deck.getClass().getSimpleName().equals("Deck"));
@@ -34,30 +34,43 @@ class DeckTest {
                 new Card(Suit.HEARTS, Rank.KING)));
 
         Card first = deck.draw();
+
         assertEquals(Rank.ACE, first.getRank());
         assertEquals(ONE_CARD, deck.size());
         assertTrue(!deck.isEmpty());
 
         deck.draw();
+
         assertTrue(deck.isEmpty());
     }
 
     @Test
     void rejectsInvalidDeckCount() {
-        assertThrows(IllegalArgumentException.class, () -> new Deck(0));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Deck(0));
     }
 
     @Test
     void rejectsEmptyCustomDeck() {
-        assertThrows(IllegalArgumentException.class, () -> new Deck(List.of()));
-        assertThrows(IllegalArgumentException.class, () -> new Deck(null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Deck(List.of()));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Deck(null));
     }
 
     @Test
     void rejectsDrawingFromEmptyDeck() {
-        Deck deck = new Deck(List.of(new Card(Suit.SPADES, Rank.ACE)));
+        Deck deck = new Deck(List.of(
+                new Card(Suit.SPADES, Rank.ACE)));
+
         deck.draw();
 
-        assertThrows(IllegalStateException.class, deck::draw);
+        assertThrows(
+                IllegalStateException.class,
+                deck::draw);
     }
 }

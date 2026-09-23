@@ -4,11 +4,11 @@ package ru.nsu.ineverovich.task112.model;
  * Представляет дилера в игре Blackjack.
  */
 public final class Dealer extends Player {
-    /**
-     * Минимальное значение руки, при котором
-     * дилер останавливается.
-     */
+    /** Минимальное значение руки, при котором дилер останавливается. */
     public static final int STAND_SCORE = 17;
+
+    private static final int BLACKJACK_SCORE = 21;
+    private static final int BLACKJACK_CARD_COUNT = 2;
 
     private Card hiddenCard;
 
@@ -45,20 +45,24 @@ public final class Dealer extends Player {
      * Проверяет, образует ли закрытая карта Blackjack
      * с открытой картой.
      *
-     * @return {@code true}, если у дилера Blackjack с учётом
-     *         закрытой карты
+     * @return {@code true}, если у дилера Blackjack
+     *         с учётом закрытой карты
      */
     public boolean hasHiddenBlackjack() {
         if (hiddenCard == null) {
             return hasBlackjack();
         }
+
         Hand possibleHand = new Hand();
+
         for (Card card : getHand().getCards()) {
             possibleHand.addCard(card);
         }
+
         possibleHand.addCard(hiddenCard);
-        return possibleHand.getCards().size() == Hand.CARD_COUNT
-                && possibleHand.getTotal() == Hand.SCORE;
+
+        return possibleHand.getCards().size() == BLACKJACK_CARD_COUNT
+                && possibleHand.getTotal() == BLACKJACK_SCORE;
     }
 
     /**

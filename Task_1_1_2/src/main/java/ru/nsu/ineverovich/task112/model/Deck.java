@@ -8,10 +8,6 @@ import java.util.List;
  * Представляет колоду карт Blackjack.
  */
 public final class Deck {
-    /** Количество стандартных колод. */
-    public static final int STANDARD_DECK_COUNT = 1;
-    /** Количество карт в стандартной колоде. */
-    public static final int CARDS_PER_DECK = 52;
     private static final int MIN_DECK_COUNT = 1;
 
     private final List<Card> cards;
@@ -19,7 +15,7 @@ public final class Deck {
 
     /**
      * Создаёт и перемешивает указанное количество
- * стандартных колод.
+     * стандартных колод.
      *
      * @param deckCount количество колод
      */
@@ -47,20 +43,25 @@ public final class Deck {
     }
 
     private static List<Card> createCards(int deckCount) {
-        List<Card> result = new ArrayList<>(deckCount * CARDS_PER_DECK);
-        for (int deckIndex = 0; deckIndex < deckCount; deckIndex++) {
+        List<Card> result = new ArrayList<>(
+                deckCount * DeckConstants.CARDS_PER_DECK);
+
+        for (int deckIndex = 0;
+             deckIndex < deckCount;
+             deckIndex++) {
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {
                     result.add(new Card(suit, rank));
                 }
             }
         }
+
         return result;
     }
 
     /**
      * Перемешивает карты и начинает раздачу
- * с первой карты.
+     * с первой карты.
      */
     public void shuffle() {
         Collections.shuffle(cards);
@@ -77,6 +78,7 @@ public final class Deck {
         if (isEmpty()) {
             throw new IllegalStateException("В колоде закончились карты");
         }
+
         Card card = cards.get(position);
         position++;
         return card;

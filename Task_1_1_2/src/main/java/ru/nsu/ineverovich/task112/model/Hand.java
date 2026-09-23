@@ -7,15 +7,10 @@ import java.util.List;
 /**
  * Хранит карты игрока и вычисляет их суммарное
  * значение.
- *
  */
 public final class Hand {
-    /** Количество карт в начальной руке Blackjack. */
-    public static final int CARD_COUNT = 2;
-    /** Максимальное значение руки без перебора. */
-    public static final int SCORE = 21;
-    /** Разница между значениями туза 11 и 1. */
-    public static final int ACE = 10;
+    private static final int MAX_SCORE = 21;
+    private static final int ACE_DIFFERENCE = 10;
 
     private final List<Card> cards = new ArrayList<>();
 
@@ -49,20 +44,21 @@ public final class Hand {
     public int getTotal() {
         int total = 0;
         int aces = 0;
+
         for (Card card : cards) {
             total += card.getValue();
             if (card.getRank() == Rank.ACE) {
                 aces++;
             }
         }
-        while (total > SCORE && aces > 0) {
-            total -= ACE;
+
+        while (total > MAX_SCORE && aces > 0) {
+            total -= ACE_DIFFERENCE;
             aces--;
         }
+
         return total;
     }
-
-
 
     /**
      * Очищает руку перед новым раундом.
