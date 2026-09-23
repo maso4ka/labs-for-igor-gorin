@@ -43,7 +43,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -81,23 +81,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>Nested Class Summary</h2>
-<div class="caption"><span>Nested Classes</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Class</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="Round.Result.html" class="type-name-link" title="enum class in ru.nsu.ineverovich.task112.game">Round.Result</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Определяет возможный результат раунда.</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -106,8 +89,10 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ineverovich.task112.model.Deck,java.lang.String)" class="member-name-link">Round</a><wbr>(<a href="../model/Deck.html" title="class in ru.nsu.ineverovich.task112.model">Deck</a>&nbsp;deck,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;playerName)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ineverovich.task112.model.Deck,ru.nsu.ineverovich.task112.model.User,ru.nsu.ineverovich.task112.model.Dealer,int)" class="member-name-link">Round</a><wbr>(<a href="../model/Deck.html" title="class in ru.nsu.ineverovich.task112.model">Deck</a>&nbsp;deck,
+ <a href="../model/User.html" title="class in ru.nsu.ineverovich.task112.model">User</a>&nbsp;user,
+ <a href="../model/Dealer.html" title="class in ru.nsu.ineverovich.task112.model">Dealer</a>&nbsp;dealer,
+ int&nbsp;roundNumber)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Создаёт новый раунд.</div>
 </div>
@@ -130,7 +115,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Раздаёт игроку и дилеру начальные карты.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Round.Result.html" title="enum class in ru.nsu.ineverovich.task112.game">Round.Result</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Result.html" title="enum class in ru.nsu.ineverovich.task112.game">Result</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#determineResult()" class="member-name-link">determineResult</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Определяет результат раунда по картам игрока
@@ -151,10 +136,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Возвращает дилера текущего раунда.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHiddenDealerCard()" class="member-name-link">getHiddenDealerCard</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRoundNumber()" class="member-name-link">getRoundNumber</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает закрытую карту дилера.</div>
+<div class="block">Возвращает номер раунда.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/User.html" title="class in ru.nsu.ineverovich.task112.model">User</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUser()" class="member-name-link">getUser</a>()</code></div>
@@ -170,11 +155,6 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFinished()" class="member-name-link">isFinished</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверяет, завершён ли раунд.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#revealDealerCard()" class="member-name-link">revealDealerCard</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Открывает закрытую карту дилера.</div>
 </div>
 </div>
 </div>
@@ -194,15 +174,19 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.ineverovich.task112.model.Deck,java.lang.String)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.ineverovich.task112.model.Deck,ru.nsu.ineverovich.task112.model.User,ru.nsu.ineverovich.task112.model.Dealer,int)">
 <h3>Round</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Round</span><wbr><span class="parameters">(<a href="../model/Deck.html" title="class in ru.nsu.ineverovich.task112.model">Deck</a>&nbsp;deck,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;playerName)</span></div>
+ <a href="../model/User.html" title="class in ru.nsu.ineverovich.task112.model">User</a>&nbsp;user,
+ <a href="../model/Dealer.html" title="class in ru.nsu.ineverovich.task112.model">Dealer</a>&nbsp;dealer,
+ int&nbsp;roundNumber)</span></div>
 <div class="block">Создаёт новый раунд.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>deck</code> - колода для раунда</dd>
-<dd><code>playerName</code> - имя игрока</dd>
+<dd><code>user</code> - игрок игры</dd>
+<dd><code>dealer</code> - дилер игры</dd>
+<dd><code>roundNumber</code> - номер раунда</dd>
 </dl>
 </section>
 </li>
@@ -219,6 +203,17 @@ loadScripts(document, 'script');</script>
 <h3>dealInitialCards</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">dealInitialCards</span>()</div>
 <div class="block">Раздаёт игроку и дилеру начальные карты.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getRoundNumber()">
+<h3>getRoundNumber</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getRoundNumber</span>()</div>
+<div class="block">Возвращает номер раунда.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>номер раунда</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -255,24 +250,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getHiddenDealerCard()">
-<h3>getHiddenDealerCard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a></span>&nbsp;<span class="element-name">getHiddenDealerCard</span>()</div>
-<div class="block">Возвращает закрытую карту дилера.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>закрытая карта или <code>null</code>, если карта открыта</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="revealDealerCard()">
-<h3>revealDealerCard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">revealDealerCard</span>()</div>
-<div class="block">Открывает закрытую карту дилера.</div>
-</section>
-</li>
-<li>
 <section class="detail" id="isDealerCardHidden()">
 <h3>isDealerCardHidden</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isDealerCardHidden</span>()</div>
@@ -304,7 +281,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="determineResult()">
 <h3>determineResult</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Round.Result.html" title="enum class in ru.nsu.ineverovich.task112.game">Round.Result</a></span>&nbsp;<span class="element-name">determineResult</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Result.html" title="enum class in ru.nsu.ineverovich.task112.game">Result</a></span>&nbsp;<span class="element-name">determineResult</span>()</div>
 <div class="block">Определяет результат раунда по картам игрока
  и дилера.</div>
 <dl class="notes">

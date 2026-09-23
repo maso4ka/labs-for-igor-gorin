@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../../../../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -48,7 +52,7 @@ loadScripts(document, 'script');</script>
 <li>Detail:&nbsp;</li>
 <li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method-detail">Method</a></li>
 </ul>
 </div>
 <div class="nav-list-search"><label for="search-input">SEARCH:</label>
@@ -116,6 +120,42 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHiddenBlackjack()" class="member-name-link">hasHiddenBlackjack</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, образует ли закрытая карта Blackjack
+ с открытой картой.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHiddenCardPresent()" class="member-name-link">isHiddenCardPresent</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет наличие закрытой карты.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#receiveHiddenCard(ru.nsu.ineverovich.task112.model.Card)" class="member-name-link">receiveHiddenCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a>&nbsp;card)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Принимает закрытую карту.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resetHand()" class="member-name-link">resetHand</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Сбрасывает состояние руки и закрытой карты.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#revealHiddenCard()" class="member-name-link">revealHiddenCard</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Открывает закрытую карту дилера.</div>
+</div>
+</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-ru.nsu.ineverovich.task112.model.Player">Methods inherited from class&nbsp;ru.nsu.ineverovich.task112.model.<a href="Player.html" title="class in ru.nsu.ineverovich.task112.model">Player</a></h3>
 <code><a href="Player.html#getHand()">getHand</a>, <a href="Player.html#getName()">getName</a>, <a href="Player.html#getScore()">getScore</a>, <a href="Player.html#hasBlackjack()">hasBlackjack</a>, <a href="Player.html#isBust()">isBust</a>, <a href="Player.html#receiveCard(ru.nsu.ineverovich.task112.model.Card)">receiveCard</a></code></div>
@@ -162,6 +202,67 @@ loadScripts(document, 'script');</script>
 <h3>Dealer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Dealer</span>()</div>
 <div class="block">Создаёт дилера.</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="receiveHiddenCard(ru.nsu.ineverovich.task112.model.Card)">
+<h3>receiveHiddenCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">receiveHiddenCard</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a>&nbsp;card)</span></div>
+<div class="block">Принимает закрытую карту.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>card</code> - закрытая карта</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="revealHiddenCard()">
+<h3>revealHiddenCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">revealHiddenCard</span>()</div>
+<div class="block">Открывает закрытую карту дилера.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasHiddenBlackjack()">
+<h3>hasHiddenBlackjack</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasHiddenBlackjack</span>()</div>
+<div class="block">Проверяет, образует ли закрытая карта Blackjack
+ с открытой картой.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если у дилера Blackjack с учётом
+         закрытой карты</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isHiddenCardPresent()">
+<h3>isHiddenCardPresent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isHiddenCardPresent</span>()</div>
+<div class="block">Проверяет наличие закрытой карты.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если карта закрыта</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="resetHand()">
+<h3>resetHand</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resetHand</span>()</div>
+<div class="block">Сбрасывает состояние руки и закрытой карты.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="Player.html#resetHand()">resetHand</a></code>&nbsp;in class&nbsp;<code><a href="Player.html" title="class in ru.nsu.ineverovich.task112.model">Player</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>

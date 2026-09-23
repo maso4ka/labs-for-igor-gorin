@@ -131,17 +131,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasBlackjack()" class="member-name-link">hasBlackjack</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверяет, есть ли у участника Blackjack.</div>
+<div class="block">Проверяет состояние руки и определяет Blackjack.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBust()" class="member-name-link">isBust</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверяет, перебрал ли участник 21.</div>
+<div class="block">Проверяет состояние руки и определяет перебор.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#receiveCard(ru.nsu.ineverovich.task112.model.Card)" class="member-name-link">receiveCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.ineverovich.task112.model">Card</a>&nbsp;card)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Добавляет карту в руку участника.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resetHand()" class="member-name-link">resetHand</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Очищает руку участника перед новым раундом.</div>
 </div>
 </div>
 </div>
@@ -213,6 +218,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="resetHand()">
+<h3>resetHand</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resetHand</span>()</div>
+<div class="block">Очищает руку участника перед новым раундом.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScore</span>()</div>
@@ -227,7 +239,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isBust()">
 <h3>isBust</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBust</span>()</div>
-<div class="block">Проверяет, перебрал ли участник 21.</div>
+<div class="block">Проверяет состояние руки и определяет перебор.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd><code>true</code>, если участник перебрал 21</dd>
@@ -238,7 +250,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hasBlackjack()">
 <h3>hasBlackjack</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasBlackjack</span>()</div>
-<div class="block">Проверяет, есть ли у участника Blackjack.</div>
+<div class="block">Проверяет состояние руки и определяет Blackjack.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd><code>true</code>, если у участника Blackjack</dd>
