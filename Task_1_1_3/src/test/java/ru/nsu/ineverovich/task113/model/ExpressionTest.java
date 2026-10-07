@@ -3,6 +3,8 @@ package ru.nsu.ineverovich.task113.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -90,5 +92,32 @@ class ExpressionTest {
         assertEquals(Operation.SUB, new Sub(new Number(1), new Number(2)).getOperation());
         assertEquals(Operation.MUL, new Mul(new Number(1), new Number(2)).getOperation());
         assertEquals(Operation.DIV, new Div(new Number(1), new Number(2)).getOperation());
+    }
+
+    @Test
+    void testsNumber() {
+        Number number = new Number(42);
+
+        assertEquals(42, number.eval(List.of()));
+        assertEquals("42", number.toString());
+        assertEquals("0", number.derivative("x").toString());
+    }
+
+    @Test
+    void testsSubtraction() {
+        Expression expression = new Sub(new Number(10), new Number(3));
+
+        assertEquals("(10-3)", expression.toString());
+        assertEquals(7, expression.eval(""));
+        assertEquals("(0-0)", expression.derivative("x").toString());
+    }
+
+    @Test
+    void testsDivision() {
+        Expression expression = new Div(new Number(10), new Number(2));
+
+        assertEquals("(10/2)", expression.toString());
+        assertEquals(5, expression.eval(""));
+        assertEquals("(((0*2)-(10*0))/(2*2))", expression.derivative("x").toString());
     }
 }
