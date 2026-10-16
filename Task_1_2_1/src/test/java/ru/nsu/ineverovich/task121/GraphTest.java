@@ -9,13 +9,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class GraphTest {
+    static Stream<Arguments> graphs() {
+        return TestGraphs.graphs();
+    }
+
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void addsAndRemovesVertices(String name, Graph graph) {
         assertTrue(graph.getVertices().isEmpty());
         assertTrue(graph.addVertex("A"));
@@ -35,7 +41,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void edgesHaveDirectionAndNoDuplicates(String name, Graph graph) {
         TestGraphs.addVertices(graph, "A", "B", "C");
         assertTrue(graph.addEdge("A", "B"));
@@ -60,7 +66,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void removingVertexPreservesOtherEdges(String name, Graph graph) {
         TestGraphs.addVertices(graph, "A", "B", "C", "D", "E");
         List<List<String>> edges = List.of(List.of("A", "B"), List.of("B", "A"),
@@ -87,7 +93,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void returnedListsAreImmutableSnapshots(String name, Graph graph) {
         graph.addVertex("A");
         List<String> vertices = graph.getVertices();
@@ -105,7 +111,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void rejectsInvalidNames(String name, Graph graph) {
         graph.addVertex("A");
         List<String> invalid = new ArrayList<>();
@@ -122,7 +128,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void rejectsUnknownEdgeEndpoints(String name, Graph graph) {
         graph.addVertex("A");
         assertThrows(IllegalArgumentException.class, () -> graph.getNeighbors("B"));
@@ -136,7 +142,7 @@ class GraphTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void clearAllowsReuse(String name, Graph graph) {
         graph.clear();
         TestGraphs.addVertices(graph, "A", "B", "C");

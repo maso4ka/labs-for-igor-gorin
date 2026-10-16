@@ -11,14 +11,19 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class GraphFileReaderTest {
+    static Stream<Arguments> graphs() {
+        return TestGraphs.graphs();
+    }
+
     @TempDir
     Path directory;
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void readsUtf8AndReplacesGraph(String name, Graph graph) throws IOException {
         Path file = write(" 4\t2 \r\nначало\r\nсередина\r\nконец\r\nотдельно\r\n"
                 + "начало\tсередина\r\nсередина конец\r\n");
@@ -33,7 +38,7 @@ class GraphFileReaderTest {
     }
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("ru.nsu.oop.graph.TestGraphs#graphs")
+    @MethodSource("graphs")
     void readsEmptyGraphAndSelfLoop(String name, Graph graph) throws IOException {
         graph.addVertex("old");
         graph.readFromFile(write("0 0\n"));
