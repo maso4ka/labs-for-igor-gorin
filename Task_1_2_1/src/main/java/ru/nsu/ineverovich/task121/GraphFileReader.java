@@ -58,7 +58,8 @@ public final class GraphFileReader {
                 int lineIndex = vertexCount + i + 1;
                 List<String> line = tokens(lines.get(lineIndex));
                 if (line.size() != 2 || !parsed.addEdge(line.get(0), line.get(1))) {
-                    throw new IOException("Неверное или повторное ребро в строке " + (lineIndex + 1));
+                    throw new IOException("Неверное или повторное ребро в строке "
+                            + (lineIndex + 1));
                 }
             }
         } catch (IllegalArgumentException exception) {

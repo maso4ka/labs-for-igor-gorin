@@ -1,6 +1,10 @@
 package ru.nsu.ineverovich.task121;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -96,10 +100,10 @@ class GraphTest {
     @MethodSource("graphs")
     void returnedListsAreImmutableSnapshots(String name, Graph graph) {
         graph.addVertex("A");
-        List<String> vertices = graph.getVertices();
+        final List<String> vertices = graph.getVertices();
         graph.addVertex("B");
         graph.addEdge("A", "B");
-        List<String> neighbors = graph.getNeighbors("A");
+        final List<String> neighbors = graph.getNeighbors("A");
         graph.addVertex("C");
         graph.addEdge("A", "C");
         assertEquals(List.of("A"), vertices);
