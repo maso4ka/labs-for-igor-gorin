@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.sort;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import ru.nsu.ineverovich.task121.graph.Graph;
 
 /** Алгоритм Кана: последовательное извлечение вершин без входящих ребер. */
 public final class KahnSort implements TopologicalSort {

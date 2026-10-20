@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;

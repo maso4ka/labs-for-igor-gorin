@@ -1,10 +1,11 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.sort;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import ru.nsu.ineverovich.task121.graph.Graph;
 
 /** Топологическая сортировка поиском в глубину с обнаружением циклов. */
 public final class DfsSort implements TopologicalSort {

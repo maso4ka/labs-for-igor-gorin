@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.graph;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -25,7 +25,8 @@ public final class AdjacencyListGraph extends AbstractGraph {
             Set<Integer> updated = new LinkedHashSet<>();
             for (int neighbor : adjacency.get(i)) {
                 if (neighbor != index) {
-                    updated.add(neighbor > index ? neighbor - 1 : neighbor);
+                    int updatedNeighborIndex = neighbor > index ? neighbor - 1 : neighbor;
+                    updated.add(updatedNeighborIndex);
                 }
             }
             adjacency.set(i, updated);

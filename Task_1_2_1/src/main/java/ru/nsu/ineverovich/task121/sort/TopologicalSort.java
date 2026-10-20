@@ -1,6 +1,7 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.sort;
 
 import java.util.List;
+import ru.nsu.ineverovich.task121.graph.Graph;
 
 /** Алгоритм топологической сортировки, не зависящий от способа хранения графа. */
 public interface TopologicalSort {

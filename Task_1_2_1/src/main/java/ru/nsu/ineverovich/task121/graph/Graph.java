@@ -1,8 +1,9 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.graph;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import ru.nsu.ineverovich.task121.io.GraphFileReader;
 
 /**
  * Ориентированный граф без весов и кратных ребер. Петли разрешены.

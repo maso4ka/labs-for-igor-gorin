@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task121;
+package ru.nsu.ineverovich.task121.graph;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ru.nsu.ineverovich.task121.support.TestGraphs;
 
 class GraphTest {
     static Stream<Arguments> graphs() {
