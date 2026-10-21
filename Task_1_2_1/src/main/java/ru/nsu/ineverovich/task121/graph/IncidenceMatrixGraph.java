@@ -10,6 +10,12 @@ import java.util.List;
  * Матрица и каждая ее строка хранятся в ArrayList.
  */
 public final class IncidenceMatrixGraph extends AbstractGraph {
+    private static final int NO_INCIDENCE = 0;
+    private static final int SOURCE_MARKER = -1;
+    private static final int TARGET_MARKER = 1;
+    private static final int SELF_LOOP_MARKER = 2;
+    private static final int EDGE_NOT_FOUND = -1;
+
     private final List<List<Integer>> matrix = new ArrayList<>();
     private int edgeCount;
 
@@ -19,13 +25,13 @@ public final class IncidenceMatrixGraph extends AbstractGraph {
 
     @Override
     protected void addVertexStorage() {
-        matrix.add(new ArrayList<>(Collections.nCopies(edgeCount, 0)));
+        matrix.add(new ArrayList<>(Collections.nCopies(edgeCount, NO_INCIDENCE)));
     }
 
     @Override
     protected void removeVertexStorage(int index) {
         for (int edge = edgeCount - 1; edge >= 0; edge--) {
-            if (matrix.get(index).get(edge) != 0) {
+            if (matrix.get(index).get(edge) != NO_INCIDENCE) {
                 removeColumn(edge);
             }
         }
@@ -34,17 +40,17 @@ public final class IncidenceMatrixGraph extends AbstractGraph {
 
     @Override
     protected boolean addEdgeStorage(int from, int to) {
-        if (findEdge(from, to) >= 0) {
+        if (findEdge(from, to) != EDGE_NOT_FOUND) {
             return false;
         }
         for (List<Integer> row : matrix) {
-            row.add(0);
+            row.add(NO_INCIDENCE);
         }
         if (from == to) {
-            matrix.get(from).set(edgeCount, 2);
+            matrix.get(from).set(edgeCount, SELF_LOOP_MARKER);
         } else {
-            matrix.get(from).set(edgeCount, -1);
-            matrix.get(to).set(edgeCount, 1);
+            matrix.get(from).set(edgeCount, SOURCE_MARKER);
+            matrix.get(to).set(edgeCount, TARGET_MARKER);
         }
         edgeCount++;
         return true;
@@ -53,7 +59,7 @@ public final class IncidenceMatrixGraph extends AbstractGraph {
     @Override
     protected boolean removeEdgeStorage(int from, int to) {
         int edge = findEdge(from, to);
-        if (edge < 0) {
+        if (edge == EDGE_NOT_FOUND) {
             return false;
         }
         removeColumn(edge);
@@ -62,18 +68,18 @@ public final class IncidenceMatrixGraph extends AbstractGraph {
 
     @Override
     protected boolean containsEdgeStorage(int from, int to) {
-        return findEdge(from, to) >= 0;
+        return findEdge(from, to) != EDGE_NOT_FOUND;
     }
 
     @Override
     protected List<Integer> getNeighborIndices(int index) {
         List<Integer> neighbors = new ArrayList<>();
         for (int edge = 0; edge < edgeCount; edge++) {
-            if (matrix.get(index).get(edge) == 2) {
+            if (matrix.get(index).get(edge) == SELF_LOOP_MARKER) {
                 neighbors.add(index);
-            } else if (matrix.get(index).get(edge) == -1) {
+            } else if (matrix.get(index).get(edge) == SOURCE_MARKER) {
                 for (int vertex = 0; vertex < matrix.size(); vertex++) {
-                    if (matrix.get(vertex).get(edge) == 1) {
+                    if (matrix.get(vertex).get(edge) == TARGET_MARKER) {
                         neighbors.add(vertex);
                         break;
                     }
@@ -86,14 +92,15 @@ public final class IncidenceMatrixGraph extends AbstractGraph {
     private int findEdge(int from, int to) {
         for (int edge = 0; edge < edgeCount; edge++) {
             if (from == to) {
-                if (matrix.get(from).get(edge) == 2) {
+                if (matrix.get(from).get(edge) == SELF_LOOP_MARKER) {
                     return edge;
                 }
-            } else if (matrix.get(from).get(edge) == -1 && matrix.get(to).get(edge) == 1) {
+            } else if (matrix.get(from).get(edge) == SOURCE_MARKER
+                    && matrix.get(to).get(edge) == TARGET_MARKER) {
                 return edge;
             }
         }
-        return -1;
+        return EDGE_NOT_FOUND;
     }
 
     private void removeColumn(int edge) {
