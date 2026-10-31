@@ -1,7 +1,16 @@
 package ru.nsu.ineverovich.task122.operations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.EMPTY_COUNT;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.INITIAL_NUMBER;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.ONE_ENTRY;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.UPDATED_NUMBER;
 
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;

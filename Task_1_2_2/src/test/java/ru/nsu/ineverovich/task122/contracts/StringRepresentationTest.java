@@ -1,7 +1,9 @@
 package ru.nsu.ineverovich.task122.contracts;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.ineverovich.task122.HashTable;
@@ -14,7 +16,7 @@ class StringRepresentationTest {
     }
 
     @Test
-    void formatsASingleMapping() {
+    void formatsSingleMapping() {
         HashTable<String, Integer> table = new HashTable<>();
         table.put("key", OLD_VALUE);
         assertEquals("{key=" + OLD_VALUE + "}", table.toString());
@@ -34,7 +36,7 @@ class StringRepresentationTest {
     }
 
     @Test
-    void formatsADirectSelfReference() {
+    void formatsDirectSelfReference() {
         HashTable<String, Object> table = new HashTable<>();
         table.put("self", table);
         assertEquals("{self=(this HashTable)}", table.toString());

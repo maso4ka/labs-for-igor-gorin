@@ -1,7 +1,24 @@
 package ru.nsu.ineverovich.task122.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.CLEAR_FREQUENCY;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.CLEAR_OPERATION;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.EMPTY_COUNT;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NULL_KEY_FREQUENCY;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OPERATION_COUNT;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.PUT_OPERATION;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.RANDOM_KEY_BOUND;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.RANDOM_SEED;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.RANDOM_STEPS;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.RANDOM_VALUE_BOUND;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.READ_OPERATION;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.REMOVE_OPERATION;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.REMOVE_PAIR_OPERATION;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.UPDATE_OPERATION;
 
 import java.util.HashMap;
 import java.util.Map;

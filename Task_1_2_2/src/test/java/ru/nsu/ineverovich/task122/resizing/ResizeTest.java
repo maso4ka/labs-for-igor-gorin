@@ -1,7 +1,15 @@
 package ru.nsu.ineverovich.task122.resizing;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.BULK_ENTRIES;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.COLLISION_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.EMPTY_COUNT;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.MINIMUM_BUCKETS;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.ONE_ENTRY;
 
 import java.util.HashSet;
 import java.util.Map;

@@ -1,7 +1,14 @@
 package ru.nsu.ineverovich.task122.iteration;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.COLLISION_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.THREE_ENTRIES;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -64,7 +71,7 @@ class IterationTest {
     }
 
     @Test
-    void traversesAWholeCollisionChain() {
+    void traversesWholeCollisionChain() {
         HashTable<FixedHashKey, String> table = new HashTable<>();
         for (String id : new String[] {"alpha", "beta", "gamma"}) {
             table.put(new FixedHashKey(id, COLLISION_HASH), id);

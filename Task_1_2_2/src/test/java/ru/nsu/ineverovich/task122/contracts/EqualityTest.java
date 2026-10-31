@@ -1,7 +1,12 @@
 package ru.nsu.ineverovich.task122.contracts;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.BULK_ENTRIES;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.EMPTY_COUNT;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.ONE_ENTRY;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.ineverovich.task122.HashTable;
@@ -11,7 +16,6 @@ class EqualityTest {
     @Test
     void equalityIgnoresInsertionOrderAndPreviousResizes() {
         HashTable<Integer, Integer> first = new HashTable<>();
-        HashTable<Integer, Integer> second = new HashTable<>();
         for (int key = EMPTY_COUNT; key < BULK_ENTRIES; key++) {
             first.put(key, key);
         }
@@ -19,6 +23,7 @@ class EqualityTest {
             first.remove(key);
         }
         first.put(null, null);
+        HashTable<Integer, Integer> second = new HashTable<>();
         second.put(null, null);
         second.put(EMPTY_COUNT, EMPTY_COUNT);
         assertEquals(first, second);

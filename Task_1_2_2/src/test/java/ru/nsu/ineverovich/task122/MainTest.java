@@ -20,6 +20,7 @@ class MainTest {
         } finally {
             System.setOut(previous);
         }
-        assertEquals(UPDATED_NUMBER + System.lineSeparator(), output.toString(StandardCharsets.UTF_8));
+        assertEquals(UPDATED_NUMBER + System.lineSeparator(),
+                output.toString(StandardCharsets.UTF_8));
     }
 }

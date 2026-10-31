@@ -1,7 +1,13 @@
 package ru.nsu.ineverovich.task122.iteration;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OTHER_VALUE;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -20,11 +26,20 @@ class FailFastTest {
         table.put("key", OLD_VALUE);
         Iterator<Map.Entry<String, Integer>> iterator = table.iterator();
         switch (operation) {
-            case "insert": table.put("new", NEW_VALUE); break;
-            case "remove": table.remove("key"); break;
-            case "removePair": table.remove("key", OLD_VALUE); break;
-            case "clear": table.clear(); break;
-            default: fail("Unknown test operation");
+            case "insert":
+                table.put("new", NEW_VALUE);
+                break;
+            case "remove":
+                table.remove("key");
+                break;
+            case "removePair":
+                table.remove("key", OLD_VALUE);
+                break;
+            case "clear":
+                table.clear();
+                break;
+            default:
+                fail("Unknown test operation");
         }
         assertThrows(ConcurrentModificationException.class, iterator::hasNext);
         assertThrows(ConcurrentModificationException.class, iterator::next);
@@ -61,7 +76,7 @@ class FailFastTest {
     }
 
     @Test
-    void clearingAnEmptyTableIsNotAStructuralChange() {
+    void clearingEmptyTableDoesNotChangeStructure() {
         HashTable<String, Integer> table = new HashTable<>();
         Iterator<Map.Entry<String, Integer>> iterator = table.iterator();
         table.clear();

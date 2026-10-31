@@ -1,7 +1,17 @@
 package ru.nsu.ineverovich.task122.operations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.nsu.ineverovich.task122.fixtures.TestConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.COLLISION_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.HIGH_BITS_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEGATIVE_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.NEW_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OLD_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.OTHER_VALUE;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.SAME_BUCKET_HASH;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.TWO_ENTRIES;
+import static ru.nsu.ineverovich.task122.fixtures.TestConstants.ZERO_HASH;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,18 +38,19 @@ class CollisionTest {
     }
 
     @Test
-    void updatesAndReplacesInsideACollisionChain() {
+    void updatesAndReplacesInsideCollisionChain() {
         HashTable<FixedHashKey, Integer> table = new HashTable<>();
         table.put(new FixedHashKey("first", COLLISION_HASH), OLD_VALUE);
         table.put(new FixedHashKey("second", COLLISION_HASH), NEW_VALUE);
-        assertEquals(OLD_VALUE, table.update(new FixedHashKey("first", COLLISION_HASH), OTHER_VALUE));
+        assertEquals(OLD_VALUE,
+                table.update(new FixedHashKey("first", COLLISION_HASH), OTHER_VALUE));
         assertEquals(OTHER_VALUE, table.put(new FixedHashKey("first", COLLISION_HASH), NEW_VALUE));
         assertEquals(TWO_ENTRIES, table.size());
         assertEquals(NEW_VALUE, table.get(new FixedHashKey("second", COLLISION_HASH)));
     }
 
     @Test
-    void distinguishesDifferentHashesThatShareABucket() {
+    void distinguishesDifferentHashesThatShareBucket() {
         HashTable<FixedHashKey, Integer> table = new HashTable<>();
         FixedHashKey first = new FixedHashKey("first", COLLISION_HASH);
         FixedHashKey second = new FixedHashKey("second", SAME_BUCKET_HASH);
@@ -51,7 +62,9 @@ class CollisionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {Integer.MIN_VALUE, Integer.MAX_VALUE, NEGATIVE_HASH, ZERO_HASH, HIGH_BITS_HASH})
+    @ValueSource(ints = {
+        Integer.MIN_VALUE, Integer.MAX_VALUE, NEGATIVE_HASH, ZERO_HASH, HIGH_BITS_HASH
+    })
     void acceptsEverySignOfHash(int hash) {
         HashTable<FixedHashKey, Integer> table = new HashTable<>();
         table.put(new FixedHashKey("key", hash), OLD_VALUE);
