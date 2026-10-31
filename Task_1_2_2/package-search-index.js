@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ineverovich.task122"},{"l":"ru.nsu.ineverovich.task122.config"},{"l":"ru.nsu.ineverovich.task122.core"},{"l":"ru.nsu.ineverovich.task122.iteration"},{"l":"ru.nsu.ineverovich.task122.storage"},{"l":"ru.nsu.ineverovich.task122.support"}];updateSearchResults();
