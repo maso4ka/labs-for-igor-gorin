@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task122.resizing;
+package ru.nsu.ineverovich.task122;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ineverovich.task122.HashTable;
-import ru.nsu.ineverovich.task122.core.TableState;
 import ru.nsu.ineverovich.task122.fixtures.FixedHashKey;
 
 /** Проверяет сохранение пар и освобождение избыточной памяти корзин. */
@@ -64,20 +62,20 @@ class ResizeTest {
 
     @Test
     void deletionAndClearReturnCapacityToTheMinimum() {
-        TableState<Integer, Integer> state = new TableState<>();
+        HashTable<Integer, Integer> table = new HashTable<>();
         for (int key = EMPTY_COUNT; key < BULK_ENTRIES; key++) {
-            state.put(key, key);
+            table.put(key, key);
         }
-        assertTrue(state.buckets().capacity() > MINIMUM_BUCKETS);
+        assertTrue(table.capacity() > MINIMUM_BUCKETS);
         for (int key = EMPTY_COUNT; key < BULK_ENTRIES; key++) {
-            state.remove(key);
+            table.remove(key);
         }
-        assertEquals(MINIMUM_BUCKETS, state.buckets().capacity());
+        assertEquals(MINIMUM_BUCKETS, table.capacity());
         for (int key = EMPTY_COUNT; key < BULK_ENTRIES; key++) {
-            state.put(key, key);
+            table.put(key, key);
         }
-        state.clear();
-        assertEquals(MINIMUM_BUCKETS, state.buckets().capacity());
-        assertEquals(EMPTY_COUNT, state.size());
+        table.clear();
+        assertEquals(MINIMUM_BUCKETS, table.capacity());
+        assertEquals(EMPTY_COUNT, table.size());
     }
 }

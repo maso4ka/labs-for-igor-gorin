@@ -8,7 +8,11 @@ public final class Main {
     private Main() {
     }
 
-    /** Выводит обновлённое значение: 1.0. */
+    /**
+     * Выводит обновлённое значение: 1.0.
+     *
+     * @param args параметры командной строки
+     */
     public static void main(String[] args) {
         HashTable<String, Number> hashTable = new HashTable<>();
         hashTable.put("one", INITIAL_VALUE);
