@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task131;
+package ru.nsu.ineverovich.task131.cli;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +22,7 @@ class MainTest {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try (PrintStream output = new PrintStream(result, true, StandardCharsets.UTF_8)) {
             System.setOut(output);
-            Main.main(new String[] {file.toString(), "бра"});
+            Main.main(file.toString(), "бра");
         } finally {
             System.setOut(previous);
         }
@@ -35,7 +35,7 @@ class MainTest {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try (PrintStream output = new PrintStream(result, true, StandardCharsets.UTF_8)) {
             System.setErr(output);
-            Main.main(new String[0]);
+            Main.main();
         } finally {
             System.setErr(previous);
         }

@@ -1,8 +1,9 @@
-package ru.nsu.ineverovich.task131;
+package ru.nsu.ineverovich.task131.cli;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.function.LongConsumer;
+import ru.nsu.ineverovich.task131.search.SubstringSearch;
 
 /** Запускает поиск подстроки в файле из командной строки. */
 public final class Main {
@@ -15,7 +16,7 @@ public final class Main {
      * @param args путь к UTF-8-файлу и искомая подстрока
      * @throws IOException если файл не удалось прочитать или декодировать
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String... args) throws IOException {
         if (args.length != 2) {
             System.err.println("Использование: Main <файл> <подстрока>");
             return;

@@ -1,10 +1,11 @@
-package ru.nsu.ineverovich.task131;
+package ru.nsu.ineverovich.task131.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -61,7 +62,10 @@ class SubstringSearchTest {
 
     @Test
     void reportsInvalidUtf8() throws IOException {
-        Path file = Files.write(directory.resolve("invalid.txt"), new byte[] {(byte) 0xFF});
+        Path file = directory.resolve("invalid.txt");
+        try (OutputStream output = Files.newOutputStream(file)) {
+            output.write(0xFF);
+        }
         assertThrows(MalformedInputException.class,
                 () -> SubstringSearch.find(file.toString(), "a"));
     }

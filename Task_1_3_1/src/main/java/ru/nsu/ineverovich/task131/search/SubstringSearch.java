@@ -1,4 +1,4 @@
-package ru.nsu.ineverovich.task131;
+package ru.nsu.ineverovich.task131.search;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,44 +45,49 @@ public final class SubstringSearch {
     public static void forEachMatch(String fileName, String substring, LongConsumer onMatch)
             throws IOException {
         Objects.requireNonNull(onMatch, "onMatch");
-        int[] pattern = substring.codePoints().toArray();
-        int[] prefix = prefixLengths(pattern);
+        List<Integer> pattern = new ArrayList<>(substring.length());
+        substring.codePoints().forEach(pattern::add);
+        int patternLength = pattern.size();
         try (BufferedReader reader = Files.newBufferedReader(Path.of(fileName),
                 StandardCharsets.UTF_8)) {
             long position = 0;
-            if (pattern.length == 0) {
+            if (patternLength == 0) {
                 do {
                     onMatch.accept(position++);
                 } while (readCodePoint(reader) != -1);
                 return;
             }
 
+            List<Integer> prefix = prefixLengths(pattern);
             int matched = 0;
             int codePoint;
             while ((codePoint = readCodePoint(reader)) != -1) {
                 matched = extendMatch(pattern, prefix, matched, codePoint);
-                if (matched == pattern.length) {
-                    onMatch.accept(position - pattern.length + 1);
-                    matched = prefix[matched - 1];
+                if (matched == patternLength) {
+                    onMatch.accept(position - patternLength + 1);
+                    // Сохраняем суффикс, с которого может начаться следующее вхождение.
+                    matched = prefix.get(matched - 1);
                 }
                 position++;
             }
         }
     }
 
-    private static int[] prefixLengths(int[] pattern) {
-        int[] prefix = new int[pattern.length];
-        for (int i = 1; i < pattern.length; i++) {
-            prefix[i] = extendMatch(pattern, prefix, prefix[i - 1], pattern[i]);
+    private static List<Integer> prefixLengths(List<Integer> pattern) {
+        List<Integer> prefix = new ArrayList<>(pattern.size());
+        prefix.add(0);
+        for (int i = 1; i < pattern.size(); i++) {
+            prefix.add(extendMatch(pattern, prefix, prefix.get(i - 1), pattern.get(i)));
         }
         return prefix;
     }
 
-    private static int extendMatch(int[] pattern, int[] prefix, int matched, int codePoint) {
-        while (matched > 0 && codePoint != pattern[matched]) {
-            matched = prefix[matched - 1];
+    private static int extendMatch(List<Integer> pattern, List<Integer> prefix,
+            int matched, int codePoint) {
+        while (matched > 0 && codePoint != pattern.get(matched)) {
+            matched = prefix.get(matched - 1);
         }
-        if (codePoint == pattern[matched]) {
+        if (codePoint == pattern.get(matched)) {
             matched++;
         }
         return matched;
@@ -91,6 +96,7 @@ public final class SubstringSearch {
     private static int readCodePoint(BufferedReader reader) throws IOException {
         int symbol = reader.read();
         if (symbol != -1 && Character.isHighSurrogate((char) symbol)) {
+            // Декодер UTF-8 выдаёт суррогаты только парами.
             return Character.toCodePoint((char) symbol, (char) reader.read());
         }
         return symbol;
